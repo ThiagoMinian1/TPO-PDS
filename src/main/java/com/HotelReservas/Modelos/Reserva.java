@@ -72,5 +72,12 @@ public class Reserva {
         return total;
     }
 
+    public void cancelar(ListaEspera lista) {
+        estadoActual.cancelar(this);
+        habitacion.liberar();
+        lista.publicarAviso("La habitacion " + habitacion.getNumero() + 
+                            " tipo " + habitacion.getTipo() + " está disponible.");
+    }
+
    
 }
