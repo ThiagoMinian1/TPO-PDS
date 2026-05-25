@@ -1,4 +1,4 @@
-package com.HotelReservas.modelos;
+package com.HotelReservas.Modelos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,7 @@ public class Reserva {
     private String estado;
     private List<ServicioExtra> serviciosExtra;
 
-    public Reserva(int id, Huesped huesped, Habitacion habitacion,
-                   String fechaIngreso, String fechaEgreso) {
+    public Reserva(int id, Huesped huesped, Habitacion habitacion, String fechaIngreso, String fechaEgreso) {
         this.id = id;
         this.huesped = huesped;
         this.habitacion = habitacion;
