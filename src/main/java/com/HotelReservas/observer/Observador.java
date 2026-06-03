@@ -1,5 +1,7 @@
 package com.HotelReservas.observer;
-
+ 
+import com.HotelReservas.Modelos.Habitacion;
+ 
 public interface Observador {
-    void actualizar(String evento, Object datos);
+    void actualizar(Habitacion habitacion);
 }
