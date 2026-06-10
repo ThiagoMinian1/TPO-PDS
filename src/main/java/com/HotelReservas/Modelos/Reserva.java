@@ -2,6 +2,10 @@ package com.HotelReservas.Modelos;
 
 import com.HotelReservas.state.EstadoReserva;
 import com.HotelReservas.state.EstadoPendiente;
+import com.HotelReservas.strategy.EstrategiaEstandar;
+import com.HotelReservas.strategy.EstrategiaPrecio;
+
+import java.time.temporal.ChronoUnit;
 
 public class Reserva {
     private int id;
@@ -12,6 +16,8 @@ public class Reserva {
     private EstadoReserva estadoActual;
     private ServicioExtra[] serviciosExtra;
     private int cantidadServicios;
+    private EstrategiaPrecio estrategia;
+
 
     public Reserva(int id, Huesped huesped, Habitacion habitacion,
                    String fechaIngreso, String fechaEgreso) {
@@ -23,6 +29,7 @@ public class Reserva {
         this.estadoActual = new EstadoPendiente();
         this.serviciosExtra = new ServicioExtra[50];
         this.cantidadServicios = 0;
+        this.estrategia = new EstrategiaEstandar();
     }
 
     public int getId() { return id; }
@@ -39,6 +46,9 @@ public class Reserva {
     public void setFechaIngreso(String fechaIngreso) { this.fechaIngreso = fechaIngreso; }
     public void setFechaEgreso(String fechaEgreso) { this.fechaEgreso = fechaEgreso; }
     public void setHabitacion(Habitacion habitacion) { this.habitacion = habitacion; }
+    public void setEstrategia(EstrategiaPrecio estrategia) { this.estrategia = estrategia;}
+
+
 
     public void confirmar() {
         estadoActual.confirmar(this);
@@ -65,12 +75,15 @@ public class Reserva {
     }
 
     public double calcularCostoTotal() {
-        double total = habitacion.getPrecioPorNoche();
+        long noches = ChronoUnit.DAYS.between(fechaIngreso, fechaEgreso);
+        double totalHabitacion = estrategia.calcularPrecio(habitacion.getPrecioPorNoche(), noches);
+        double totalServicios = 0;
         for (int i = 0; i < cantidadServicios; i++) {
-            total += serviciosExtra[i].getCostoAdicional();
+            totalServicios += serviciosExtra[i].getCostoAdicional();
         }
-        return total;
+        return totalHabitacion + totalServicios;
     }
+
 
     public void cancelar(ListaEspera lista) {
         estadoActual.cancelar(this);

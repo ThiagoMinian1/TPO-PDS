@@ -1,6 +1,6 @@
 package com.HotelReservas.strategy;
 
-public class EstrategiaTemporadaAlta implements EstrategiaPrecio {
+public class EstrategiaEstandar implements EstrategiaPrecio {
 
     @Override
     public double calcularPrecio(double precioPorNoche, long cantidadNoches) {
@@ -9,8 +9,7 @@ public class EstrategiaTemporadaAlta implements EstrategiaPrecio {
 
     @Override
     public String getNombre() {
-        return "Temporada Alta (sin descuento)";
+        return "Estándar (sin descuento)";
     }
 }
-
 
