@@ -3,7 +3,7 @@ package com.HotelReservas.facade;
 import com.HotelReservas.Modelos.Reserva;
 import com.HotelReservas.adapter.ServicioEmail;
 import com.HotelReservas.adapter.EmailAdapter;
-import com.HotelReservas.template.ProcesadorPago;
+import com.HotelReservas.templateMethod.ProcesadorPago;
 
 public class ReservaFacade {
 
